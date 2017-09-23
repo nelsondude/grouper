@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Expo from 'expo'
 import { StyleSheet, Text, View } from 'react-native';
 import Swiper from "./src/components/Swiper";
@@ -21,6 +21,13 @@ import {
 import Launch from "./src/components/Launch";
 import DrawerContent from "./src/components/DrawerContent";
 import Groups from "./src/components/Groups";
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './src/components/reducers';
+import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +71,9 @@ const config = {
 // firebase.initializeApp(config);
 
 
-export default class App extends React.Component {
+export default class App extends Component {
+  store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
   render() {
     return (
       <Router
