@@ -8,7 +8,7 @@ class Home extends Component {
   render() {
     return(
       <View>
-        <Text>Hey There</Text>
+        <Text>Hey Now</Text>
       </View>
     )
   }
