@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Expo from 'expo'
+import Expo from 'expo';
 import { StyleSheet, Text, View } from 'react-native';
 import Swiper from "./src/components/Swiper";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
@@ -21,7 +21,12 @@ import {
 import Launch from "./src/components/Launch";
 import DrawerContent from "./src/components/DrawerContent";
 import Groups from "./src/components/Groups";
+<<<<<<< HEAD
 import GroupDetail from './src/components/GroupDetail';
+=======
+import Home from "./src/components/Home";
+import Popup from "./src/components/Popup";
+>>>>>>> 40530955d0aba2d2944cd36a9d9b160af9eea56c
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -43,8 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
   },
   navBarStyle: {
-    color: 'white',
-    backgroundColor: 'black'
+    color: '#000',
+    backgroundColor: '#fff',
+    fontSize: 36
   }
 });
 
@@ -88,6 +94,7 @@ export default class App extends Component {
               hideNavBar
               transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forFadeFromBottomAndroid })}
             >
+<<<<<<< HEAD
               <Lightbox>
                 <Stack
                   hideNavBar
@@ -147,6 +154,25 @@ export default class App extends Component {
                 </Drawer>
 
               </Lightbox>
+=======
+              <Scene
+               key="root"
+               titleStyle={{ alignSelf: 'center' }}
+              >
+                <Scene hideNavBar key="launch" component={Launch} title="Launch" />
+                <Scene
+                     key="classes"
+                     component={Groups}
+                     title="Classes"
+                     back={false}
+                     onRight={() => {Actions.joinModal()}}
+                     rightTitle="+"
+                     navigationBarStyle={styles.navBarStyle}/>
+                <Scene
+                 key="joinModal"
+                 component={Popup}/>
+              </Scene>
+>>>>>>> 40530955d0aba2d2944cd36a9d9b160af9eea56c
             </Modal>
           </Overlay>
         </Router>

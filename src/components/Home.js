@@ -7,9 +7,13 @@ import Swiper from "./Swiper";
 class Home extends Component {
   render() {
     return(
-      <View>
-        <Text>Hey There</Text>
-      </View>
+      <Scene
+        key="home"
+      >
+        <View>
+          <Text>Hey There</Text>
+        </View>
+      </Scene>
     )
   }
 }
