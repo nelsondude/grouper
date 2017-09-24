@@ -3,12 +3,9 @@ import { AuthSession } from 'expo';
 import { View, Dimensions, Alert } from 'react-native';
 import { Card, SwipeDeck } from 'react-native-elements';
 import { Button } from 'react-native-elements';
-// import firebase from 'firebase';
-
-const FB_APP_ID = '181582999053484';
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
+import { connect } from 'react-redux';
+import { loginUser } from './actions';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from "./actions/globals";
 
 
 class Swiper extends Component {
@@ -45,59 +42,9 @@ class Swiper extends Component {
     console.log("Card disliked: " + card.text);
   }
 
-  loginFacebook() {
-    Expo.Facebook.
 
-    Expo.Facebook.logInWithReadPermissionsAsync(appId, options)
-    console.log('pressed')
-  }
-
-  // async logIn() {
-  //   const appId = "181582999053484";
-  //   const options = {
-  //     permissions: ['public_profile', 'user_friends'],
-  //     behavior: 'native'
-  //   };
-  //   const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(appId, options);
-  //   console.log(type, token);
-  //   if (type === 'success') {
-  //     // Get the user's name using Facebook's Graph API
-  //     const response = await fetch(
-  //       `https://graph.facebook.com/me?access_token=${token}`);
-  //     Alert.alert(
-  //       'Logged in!',
-  //       `Hi ${(await response.json()).name}!`,
-  //     );
-  //   }
-  // }
-  logIn = async () => {
-    let redirectUrl = AuthSession.getRedirectUrl();
-
-    // You need to add this url to your authorized redirect urls on your Facebook app
-    console.log({ redirectUrl });
-
-
-    let result = await AuthSession.startAsync({
-      authUrl:
-      `https://www.facebook.com/v2.8/dialog/oauth?response_type=token` +
-      `&client_id=${FB_APP_ID}` +
-      `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
-    });
-
-    if (result.type !== 'success') {
-      alert('Uh oh, something went wrong');
-      return;
-    }
-    console.log(result);
-
-    let accessToken = result.params.access_token;
-    let userInfoResponse = await fetch(
-      `https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,picture.type(large)`
-    );
-    const userInfo = await userInfoResponse.json();
-
-    this.setState({ userInfo, accessToken });
-    console.log(this.state);
+  logIn() {
+    this.props.loginUser();
   };
 
 
@@ -133,4 +80,9 @@ styles = {
   }
 };
 
-export default Swiper;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {};
+};
+
+export default connect(mapStateToProps, {loginUser})(Swiper);
