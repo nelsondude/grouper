@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Expo from 'expo'
+import Expo from 'expo';
 import { StyleSheet, Text, View } from 'react-native';
 import Swiper from "./src/components/Swiper";
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
@@ -21,6 +21,8 @@ import {
 import Launch from "./src/components/Launch";
 import DrawerContent from "./src/components/DrawerContent";
 import Groups from "./src/components/Groups";
+import Home from "./src/components/Home";
+import Popup from "./src/components/Popup";
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -42,8 +44,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
   },
   navBarStyle: {
-    color: 'white',
-    backgroundColor: 'black'
+    color: '#000',
+    backgroundColor: '#fff',
+    fontSize: 36
   }
 });
 
@@ -87,67 +90,23 @@ export default class App extends Component {
               hideNavBar
               transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forFadeFromBottomAndroid })}
             >
-              <Lightbox>
-                <Stack
-                  hideNavBar
-                  key="root"
-                  titleStyle={{ alignSelf: 'center' }}
-                >
-                  <Scene key="launch" component={Launch} title="Launch" />
-                </Stack>
-                <Drawer
-                  initial
-                  hideNavBar
-                  key="drawer"
-                  contentComponent={DrawerContent}
-                  drawerText="Drawer"
-                >
-                  {/*
-                  Wrapper Scene needed to fix a bug where the tabs would
-                  reload as a modal ontop of itself
-                */}
-                  <Scene hideNavBar>
-                    <Tabs
-                      key="tabbar"
-                      showLabel={false}
-                      tabBarStyle={styles.tabBarStyle}
-                      activeBackgroundColor="rgba(0,0,0,0.8)"
-                      inactiveBackgroundColor="rgba(255, 255, 255, 1)"
-                    >
-                      <Stack
-                        key="tab_1"
-                        title="Tab #1"
-                        tabBarLabel="TAB #1"
-                        navigationBarStyle={styles.navBarStyle}
-                        titleStyle={{ color: 'white', alignSelf: 'center' }}
-                      >
-                        <Scene
-                          key="swiper"
-                          component={Swiper}
-                          title="Swiper"
-                          onRight={() => alert('Right button')}
-                          rightTitle="Right"
-
-                        />
-
-                      </Stack>
-
-                      <Stack
-                        key="tab_2"
-                        title="Tab #2"
-                        navigationBarStyle={styles.navBarStyle}
-                        titleStyle={{ color: 'white', alignSelf: 'center' }}
-                      >
-                        <Scene
-                          key="classes"
-                          component={Groups}
-                          title="Classes"
-                        />
-                      </Stack>
-                    </Tabs>
-                  </Scene>
-                </Drawer>
-              </Lightbox>
+              <Scene
+               key="root"
+               titleStyle={{ alignSelf: 'center' }}
+              >
+                <Scene hideNavBar key="launch" component={Launch} title="Launch" />
+                <Scene
+                     key="classes"
+                     component={Groups}
+                     title="Classes"
+                     back={false}
+                     onRight={() => {Actions.joinModal()}}
+                     rightTitle="+"
+                     navigationBarStyle={styles.navBarStyle}/>
+                <Scene
+                 key="joinModal"
+                 component={Popup}/>
+              </Scene>
             </Modal>
           </Overlay>
         </Router>

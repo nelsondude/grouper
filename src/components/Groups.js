@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { fetchGroups } from "./actions"
 import { connect } from 'react-redux';
