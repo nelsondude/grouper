@@ -21,6 +21,7 @@ import {
 import Launch from "./src/components/Launch";
 import DrawerContent from "./src/components/DrawerContent";
 import Groups from "./src/components/Groups";
+import GroupDetail from './src/components/GroupDetail';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -138,15 +139,13 @@ export default class App extends Component {
                         navigationBarStyle={styles.navBarStyle}
                         titleStyle={{ color: 'white', alignSelf: 'center' }}
                       >
-                        <Scene
-                          key="classes"
-                          component={Groups}
-                          title="Classes"
-                        />
+                        <Scene key="classes" component={Groups} title="Classes"/>
+                        <Scene key="classes_detail" component={GroupDetail} title="Group Detail" />
                       </Stack>
                     </Tabs>
                   </Scene>
                 </Drawer>
+
               </Lightbox>
             </Modal>
           </Overlay>
